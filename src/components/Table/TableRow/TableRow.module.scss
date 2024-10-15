@@ -1,0 +1,16 @@
+.tableRow {
+  &:nth-child(even) {
+    background-color: white;
+  }
+  &:nth-child(odd) {
+    background-color: #f4f7fa;
+  }
+
+  &.tableRow_selected {
+    background-color: #ADD8E6FF;
+  }
+
+
+
+}
+

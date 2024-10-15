@@ -1,0 +1,20 @@
+.tableContainer {
+  width: 60%;
+  margin: 60px auto;
+  padding: 40px;
+  background-color: #f3f3f3;
+  border-radius: 20px;
+}
+
+.table {
+  width: 100%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: #bbbbbb 1px solid;
+}
+.table th {
+  border: #bbbbbb 1px solid;
+}
+
+/*# sourceMappingURL=Table.module.css.map */

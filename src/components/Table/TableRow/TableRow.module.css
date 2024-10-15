@@ -1,0 +1,11 @@
+.tableRow:nth-child(even) {
+  background-color: white;
+}
+.tableRow:nth-child(odd) {
+  background-color: #f4f7fa;
+}
+.tableRow.tableRow_selected {
+  background-color: lightblue;
+}
+
+/*# sourceMappingURL=TableRow.module.css.map */
