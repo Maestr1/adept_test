@@ -1,5 +1,5 @@
 import type { ICompany } from "../tableSlice"
-import { changeItem, deleteItem } from "../tableSlice"
+import { changeItem, removeItem } from "../tableSlice"
 import type React from "react"
 import { useState } from "react"
 import styles from "./TableRow.module.css"
@@ -26,8 +26,8 @@ export const TableRow = (props: ITableRowProps) => {
     dispatch(changeItem(company))
   }
 
-  function handleDeleteClick() {
-    dispatch(deleteItem(company))
+  function handleRemoveClick() {
+    dispatch(removeItem(company))
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -55,7 +55,7 @@ export const TableRow = (props: ITableRowProps) => {
           { isEditMode ? (<input name="address" type="text" value={ company.address }
                                  onChange={ handleChange } />) : (
             <p>{ company.address }</p>) }
-          <ButtonsBlock handleDeleteClick={ handleDeleteClick } handleSaveClick={ handleSaveClick }
+          <ButtonsBlock handleRemoveClick={ handleRemoveClick } handleSaveClick={ handleSaveClick }
                         isEditMode={ isEditMode }
                         handleEditClick={ handleEditClick } />
         </div>

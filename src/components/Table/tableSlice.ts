@@ -28,6 +28,9 @@ export const tableSlice = createAppSlice({
     setValue: create.reducer((state, action: PayloadAction<ICompany[]>) => {
       state.companies = action.payload
     }),
+    addItem: create.reducer((state, action: PayloadAction<ICompany>) => {
+      state.companies = [...state.companies, action.payload]
+    }),
     changeItem: create.reducer((state, action: PayloadAction<ICompany>) => {
       state.companies = state.companies.map(item => {
         if (item.id === action.payload.id) {
@@ -36,9 +39,12 @@ export const tableSlice = createAppSlice({
         return item
       })
     }),
-    deleteItem: create.reducer((state, action: PayloadAction<ICompany>) => {
+    removeItem: create.reducer((state, action: PayloadAction<ICompany>) => {
       state.companies = state.companies.filter(item => item.id !== action.payload.id)
     }),
+    removeItems: create.reducer((state, action: PayloadAction<number[]>) => {
+      state.companies = state.companies.filter(item => !action.payload.includes(item.id))
+    })
     // increment: create.reducer(state => {
     //   // Redux Toolkit allows us to write "mutating" logic in reducers. It
     //   // doesn't actually mutate the state because it uses the Immer library,
@@ -88,7 +94,7 @@ export const tableSlice = createAppSlice({
 })
 
 // Action creators are generated for each case reducer function.
-export const { setValue, changeItem, deleteItem } =
+export const { setValue, changeItem, removeItem, addItem, removeItems } =
   tableSlice.actions
 
 // Selectors returned by `slice.selectors` take the root state as their first argument.

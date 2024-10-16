@@ -2,12 +2,14 @@ import type React from "react"
 import { useState } from "react"
 import { TableRow } from "./TableRow/TableRow"
 import styles from "./Table.module.css"
-import { useAppSelector } from "../../hooks/store"
+import { useAppDispatch, useAppSelector } from "../../hooks/store"
+import { removeItems, selectCompanies } from "./tableSlice"
 
 export const Table = () => {
 
+  const dispatch = useAppDispatch()
   const [selectedRows, setSelectedRows] = useState<number[]>([])
-  const companies = useAppSelector(state => state.table.companies)
+  const companies = useAppSelector(selectCompanies)
 
   function handleCheckboxChange(id: number) {
     setSelectedRows(prevState =>
@@ -24,6 +26,12 @@ export const Table = () => {
     } else {
       setSelectedRows([])
     }
+  }
+
+  function handleRemoveClick() {
+    dispatch(removeItems(selectedRows))
+    setSelectedRows([])
+    document.querySelectorAll("input[type=\"checkbox\"]").forEach(checkbox => (checkbox as HTMLInputElement).checked = false)
   }
 
   return (
@@ -53,6 +61,8 @@ export const Table = () => {
         )) }
         </tbody>
       </table>
+      <button>Добавить</button>
+      <button onClick={ handleRemoveClick } disabled={ selectedRows.length === 0 }>Удалить выделенные</button>
     </section>
   )
 }
