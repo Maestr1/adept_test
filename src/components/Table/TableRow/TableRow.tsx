@@ -1,8 +1,9 @@
 import type { ICompany } from "../tableSlice"
-import { changeItem } from "../tableSlice"
+import { changeItem, deleteItem } from "../tableSlice"
+import type React from "react"
+import { useState } from "react"
 import styles from "./TableRow.module.css"
 import { ButtonsBlock } from "./ButtonsBlock/ButtonsBlock"
-import { useState } from "react"
 import { useAppDispatch } from "../../../hooks/store"
 
 export interface ITableRowProps {
@@ -12,9 +13,8 @@ export interface ITableRowProps {
 }
 
 export const TableRow = (props: ITableRowProps) => {
-  const { selectedRows } = props
+  const { selectedRows, company } = props
   const [isEditMode, setIsEditMode] = useState(false)
-  const [company, setCompany] = useState<ICompany>(props.company)
   const dispatch = useAppDispatch()
 
   function handleEditClick() {
@@ -26,6 +26,16 @@ export const TableRow = (props: ITableRowProps) => {
     dispatch(changeItem(company))
   }
 
+  function handleDeleteClick() {
+    dispatch(deleteItem(company))
+  }
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target
+    console.log(`${ name }: ${ value }`)
+    dispatch(changeItem({ ...company, [name]: value }))
+  }
+
   return (
     <tr
       className={ `${ styles.tableRow } ${ selectedRows.includes(company.id) ? styles.tableRow_selected : "" }` }>
@@ -35,17 +45,18 @@ export const TableRow = (props: ITableRowProps) => {
       </td>
       <td>
         <div className={ styles.tableRow__wrapper }>
-          { isEditMode ? (<input type="text" value={ company.name }
-                                 onChange={ e => setCompany({ ...company, name: e.target.value }) } />) : (
+          { isEditMode ? (<input name="name" type="text" value={ company.name }
+                                 onChange={ handleChange } />) : (
             <p>{ company.name }</p>) }
         </div>
       </td>
       <td>
         <div className={ styles.tableRow__wrapper }>
-          { isEditMode ? (<input type="text" value={ company.address }
-                                 onChange={ e => setCompany({ ...company, address: e.target.value }) } />) : (
+          { isEditMode ? (<input name="address" type="text" value={ company.address }
+                                 onChange={ handleChange } />) : (
             <p>{ company.address }</p>) }
-          <ButtonsBlock handleSaveClick={ handleSaveClick } isEditMode={ isEditMode }
+          <ButtonsBlock handleDeleteClick={ handleDeleteClick } handleSaveClick={ handleSaveClick }
+                        isEditMode={ isEditMode }
                         handleEditClick={ handleEditClick } />
         </div>
       </td>

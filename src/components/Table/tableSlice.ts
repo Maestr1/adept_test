@@ -35,7 +35,10 @@ export const tableSlice = createAppSlice({
         }
         return item
       })
-    })
+    }),
+    deleteItem: create.reducer((state, action: PayloadAction<ICompany>) => {
+      state.companies = state.companies.filter(item => item.id !== action.payload.id)
+    }),
     // increment: create.reducer(state => {
     //   // Redux Toolkit allows us to write "mutating" logic in reducers. It
     //   // doesn't actually mutate the state because it uses the Immer library,
@@ -85,7 +88,7 @@ export const tableSlice = createAppSlice({
 })
 
 // Action creators are generated for each case reducer function.
-export const { setValue, changeItem } =
+export const { setValue, changeItem, deleteItem } =
   tableSlice.actions
 
 // Selectors returned by `slice.selectors` take the root state as their first argument.
