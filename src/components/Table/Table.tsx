@@ -3,13 +3,17 @@ import { useState } from "react"
 import { TableRow } from "./TableRow/TableRow"
 import styles from "./Table.module.css"
 import { useAppDispatch, useAppSelector } from "../../hooks/store"
-import { removeItems, selectCompanies } from "./tableSlice"
+import type { ICompany } from "./tableSlice"
+import { addItem, removeItems, selectCompanies } from "./tableSlice"
 
 export const Table = () => {
 
   const dispatch = useAppDispatch()
   const [selectedRows, setSelectedRows] = useState<number[]>([])
   const companies = useAppSelector(selectCompanies)
+  const [newCompany, setNewCompany] = useState<ICompany>({ id: 0, name: "", address: "" })
+  const [addFormIsActive, setAddFormIsActive] = useState(false)
+
 
   function handleCheckboxChange(id: number) {
     setSelectedRows(prevState =>
@@ -26,6 +30,33 @@ export const Table = () => {
     } else {
       setSelectedRows([])
     }
+  }
+
+  function handleAddClick() {
+    setAddFormIsActive(true)
+  }
+
+  function resetForm() {
+    (document.querySelector("form") as HTMLFormElement).reset()
+    setAddFormIsActive(false)
+    setNewCompany({ id: 0, name: "", address: "" })
+  }
+
+  function handleSaveOnEnter(event: React.FormEvent<HTMLFormElement>) {
+    resetForm()
+    event.preventDefault()
+    dispatch(addItem({ ...newCompany, id: companies.length + 1 }))
+  }
+
+  function handleSaveOnClick() {
+    resetForm()
+    dispatch(addItem({ ...newCompany, id: companies.length + 1 }))
+  }
+
+
+  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target
+    setNewCompany({ ...newCompany, [name]: value })
   }
 
   function handleRemoveClick() {
@@ -59,9 +90,18 @@ export const Table = () => {
           <TableRow key={ company.id } company={ company } selectedRows={ selectedRows }
                     handleCheckboxChange={ handleCheckboxChange } />
         )) }
+        <tr>
+          <td colSpan={ 3 }>
+            <form hidden={!addFormIsActive} id="form" action="" onSubmit={ handleSaveOnEnter }>
+              <input name="name" onChange={ handleInputChange } required type="text" placeholder="Название компании" />
+              <input name="address" onChange={ handleInputChange } required type="text" placeholder="Адрес" />
+              <input type="submit" hidden />
+            </form>
+          </td>
+        </tr>
         </tbody>
       </table>
-      <button>Добавить</button>
+      <button onClick={ addFormIsActive ? handleSaveOnClick : handleAddClick }>Добавить</button>
       <button onClick={ handleRemoveClick } disabled={ selectedRows.length === 0 }>Удалить выделенные</button>
     </section>
   )

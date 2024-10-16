@@ -32,7 +32,6 @@ export const TableRow = (props: ITableRowProps) => {
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target
-    console.log(`${ name }: ${ value }`)
     dispatch(changeItem({ ...company, [name]: value }))
   }
 
