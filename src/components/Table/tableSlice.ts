@@ -27,6 +27,14 @@ export const tableSlice = createAppSlice({
   reducers: create => ({
     setValue: create.reducer((state, action: PayloadAction<ICompany[]>) => {
       state.companies = action.payload
+    }),
+    changeItem: create.reducer((state, action: PayloadAction<ICompany>) => {
+      state.companies = state.companies.map(item => {
+        if (item.id === action.payload.id) {
+          return action.payload
+        }
+        return item
+      })
     })
     // increment: create.reducer(state => {
     //   // Redux Toolkit allows us to write "mutating" logic in reducers. It
@@ -77,7 +85,7 @@ export const tableSlice = createAppSlice({
 })
 
 // Action creators are generated for each case reducer function.
-export const { setValue } =
+export const { setValue, changeItem } =
   tableSlice.actions
 
 // Selectors returned by `slice.selectors` take the root state as their first argument.

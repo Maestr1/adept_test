@@ -2,6 +2,7 @@
   &:nth-child(even) {
     background-color: white;
   }
+
   &:nth-child(odd) {
     background-color: #f4f7fa;
   }
@@ -10,7 +11,36 @@
     background-color: #ADD8E6FF;
   }
 
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
+    p {
+      margin: 0;
+      padding: 0;
+    }
+  }
 
+  &__buttonsWrapper {
+    display: flex;
+    gap: 10px;
+
+    button {
+      padding: 0;
+      cursor: pointer;
+      border: none;
+      background: none;
+      transition: opacity .1s ease-in-out;
+      &:hover {
+        opacity: 0.5;
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
 }
 
