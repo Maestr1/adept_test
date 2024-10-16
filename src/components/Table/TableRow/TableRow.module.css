@@ -7,32 +7,31 @@
 .tableRow.tableRow_selected {
   background-color: lightblue;
 }
+.tableRow td {
+  border: #bbbbbb 1px solid;
+}
+.tableRow td:nth-child(1) {
+  width: 10%;
+  text-align: center;
+}
+.tableRow td:nth-child(2) {
+  width: 15%;
+}
 .tableRow__wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .tableRow__wrapper p {
+  width: 100%;
   margin: 0;
   padding: 0;
 }
-.tableRow__buttonsWrapper {
+.tableRow__wrapper input {
+  width: 100%;
+}
+.tableRow__input {
   display: flex;
-  gap: 10px;
-}
-.tableRow__buttonsWrapper button {
-  padding: 0;
-  cursor: pointer;
-  border: none;
-  background: none;
-  transition: opacity 0.1s ease-in-out;
-}
-.tableRow__buttonsWrapper button:hover {
-  opacity: 0.5;
-}
-.tableRow__buttonsWrapper button svg {
-  width: 24px;
-  height: 24px;
 }
 
 /*# sourceMappingURL=TableRow.module.css.map */
