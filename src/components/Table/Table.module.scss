@@ -1,20 +1,81 @@
+$tableWidth: 1200px;
+
 .tableContainer {
-  width: 60%;
+  box-sizing: border-box;
   margin: 60px auto;
   padding: 40px;
-  background-color: #f3f3f3;
+  width: $tableWidth;
   border-radius: 20px;
+  background-color: #f3f3f3;
 }
 
 .table {
-  width: 100%;
+  box-sizing: border-box;
   margin: 0 auto;
-  border-collapse:collapse;
-  border-spacing:0;
-  border: #bbbbbb 1px solid;
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  border: #bbb 1px solid;
 
   th {
+    border: #bbb 1px solid;
     background-color: #e7f4fa;
-    border: #bbbbbb 1px solid;
+  }
+
+  &__formContainer {
+    td {
+      padding: 0;
+    }
+
+    form {
+      display: flex;
+
+      input {
+        box-sizing: border-box;
+        padding: 0 2px;
+        height: 26px;
+        border: none;
+        border-left: #bbb 1px solid;
+
+        &:nth-child(1) {
+          width: calc($tableWidth * .14);
+        }
+
+        &:nth-child(2) {
+          width: 100%;
+        }
+      }
+
+      button {
+        padding: 0;
+        width: 26px;
+        height: 26px;
+        cursor: pointer;
+        border: none;
+        background-color: #fff;
+        transition: opacity .2s ease-in-out;
+
+        &:hover {
+          opacity: 0.5;
+        }
+
+        svg {
+          width: 26px;
+          height: 26px;
+        }
+      }
+    }
+  }
+
+  &__buttonsContainer {
+    padding-block: 6px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    button {
+      padding: 6px;
+      min-width: 170px;
+    }
   }
 }

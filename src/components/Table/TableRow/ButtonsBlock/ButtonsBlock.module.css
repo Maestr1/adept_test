@@ -4,17 +4,19 @@
 }
 .buttonsBlock button {
   padding: 0;
+  width: 26px;
+  height: 26px;
   cursor: pointer;
   border: none;
   background: none;
-  transition: opacity 0.1s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
 }
 .buttonsBlock button:hover {
   opacity: 0.5;
 }
 .buttonsBlock button svg {
-  width: 20px;
-  height: 20px;
+  width: 26px;
+  height: 26px;
 }
 
 /*# sourceMappingURL=ButtonsBlock.module.css.map */

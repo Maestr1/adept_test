@@ -33,7 +33,10 @@ export const Table = () => {
   }
 
   function handleAddClick() {
-    setAddFormIsActive(true)
+    setAddFormIsActive(prevState => !prevState)
+    if (addFormIsActive) {
+      resetForm()
+    }
   }
 
   function resetForm() {
@@ -47,12 +50,6 @@ export const Table = () => {
     event.preventDefault()
     dispatch(addItem({ ...newCompany, id: companies.length + 1 }))
   }
-
-  function handleSaveOnClick() {
-    resetForm()
-    dispatch(addItem({ ...newCompany, id: companies.length + 1 }))
-  }
-
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target
@@ -90,19 +87,27 @@ export const Table = () => {
           <TableRow key={ company.id } company={ company } selectedRows={ selectedRows }
                     handleCheckboxChange={ handleCheckboxChange } />
         )) }
-        <tr>
-          <td colSpan={ 3 }>
-            <form hidden={!addFormIsActive} id="form" action="" onSubmit={ handleSaveOnEnter }>
+        <tr className={ styles.table__formContainer } hidden={ !addFormIsActive }>
+          <td></td>
+          <td colSpan={ 2 }>
+            <form id="form" action="" onSubmit={ handleSaveOnEnter }>
               <input name="name" onChange={ handleInputChange } required type="text" placeholder="Название компании" />
               <input name="address" onChange={ handleInputChange } required type="text" placeholder="Адрес" />
-              <input type="submit" hidden />
+              <button type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px">
+                  <path
+                    d="M 12 2 C 6.4889971 2 2 6.4889971 2 12 C 2 17.511003 6.4889971 22 12 22 C 17.511003 22 22 17.511003 22 12 C 22 6.4889971 17.511003 2 12 2 z M 12 4 C 16.430123 4 20 7.5698774 20 12 C 20 16.430123 16.430123 20 12 20 C 7.5698774 20 4 16.430123 4 12 C 4 7.5698774 7.5698774 4 12 4 z M 16.292969 8.2929688 L 10 14.585938 L 7.7070312 12.292969 L 6.2929688 13.707031 L 10 17.414062 L 17.707031 9.7070312 L 16.292969 8.2929688 z" />
+                </svg>
+              </button>
             </form>
           </td>
         </tr>
         </tbody>
       </table>
-      <button onClick={ addFormIsActive ? handleSaveOnClick : handleAddClick }>Добавить</button>
-      <button onClick={ handleRemoveClick } disabled={ selectedRows.length === 0 }>Удалить выделенные</button>
+      <div className={ styles.table__buttonsContainer }>
+        <button onClick={ handleAddClick }>{ addFormIsActive ? "Отмена" : "Добавить компанию" }</button>
+        <button onClick={ handleRemoveClick } disabled={ selectedRows.length === 0 }>Удалить выделенные</button>
+      </div>
     </section>
   )
 }

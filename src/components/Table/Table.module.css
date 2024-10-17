@@ -1,21 +1,68 @@
 .tableContainer {
-  width: 60%;
+  box-sizing: border-box;
   margin: 60px auto;
   padding: 40px;
-  background-color: #f3f3f3;
+  width: 1200px;
   border-radius: 20px;
+  background-color: #f3f3f3;
 }
 
 .table {
-  width: 100%;
+  box-sizing: border-box;
   margin: 0 auto;
-  border-collapse: collapse;
+  width: 100%;
   border-spacing: 0;
-  border: #bbbbbb 1px solid;
+  border-collapse: collapse;
+  border: #bbb 1px solid;
 }
 .table th {
+  border: #bbb 1px solid;
   background-color: #e7f4fa;
-  border: #bbbbbb 1px solid;
+}
+.table__formContainer td {
+  padding: 0;
+}
+.table__formContainer form {
+  display: flex;
+}
+.table__formContainer form input {
+  box-sizing: border-box;
+  padding: 0 2px;
+  height: 26px;
+  border: none;
+  border-left: #bbb 1px solid;
+}
+.table__formContainer form input:nth-child(1) {
+  width: 168px;
+}
+.table__formContainer form input:nth-child(2) {
+  width: 100%;
+}
+.table__formContainer form button {
+  padding: 0;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  border: none;
+  background-color: #fff;
+  transition: opacity 0.2s ease-in-out;
+}
+.table__formContainer form button:hover {
+  opacity: 0.5;
+}
+.table__formContainer form button svg {
+  width: 26px;
+  height: 26px;
+}
+.table__buttonsContainer {
+  padding-block: 6px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.table__buttonsContainer button {
+  padding: 6px;
+  min-width: 170px;
 }
 
 /*# sourceMappingURL=Table.module.css.map */
