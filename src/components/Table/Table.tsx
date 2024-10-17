@@ -48,7 +48,7 @@ export const Table = () => {
   function handleSaveOnEnter(event: React.FormEvent<HTMLFormElement>) {
     resetForm()
     event.preventDefault()
-    dispatch(addItem({ ...newCompany, id: companies.length + 1 }))
+    dispatch(addItem({ ...newCompany, id: Date.now() }))
   }
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
